@@ -1,0 +1,4 @@
+#!/bin/bash
+
+grep -vE "^\s*#" | cut $@
+

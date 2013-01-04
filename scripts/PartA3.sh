@@ -1,27 +1,29 @@
 #!/bin/bash
 
-outdir="dat/A3"
+BINDIR=@BINDIR@
+
+if [ $# == 0 ]; then
+  outdir="./fisher"
+else
+  outdir="$1"
+fi
+
 data="$outdir/7.dat"
 fitxenergies="$outdir/7_energies.dat"
 outfile="$outdir/energies.dat"
 outplot="$outdir/energies.eps"
-PG=
-#PG=" -pg "
 
-gcc -O3 -o binning binning.c -lm
-gcc -O3 $PG -o ising ising.c -lm
+mkdir -p "$outdir"
 
-mkdir -p $outdir
+rm -f "$outfile"
 
-rm -f $outfile
+$BINDIR/ising -d 2 -L 20 -T 2.0 --nmeas 1 --nmcs 10000000  --ieq 1000 -s 107 > "$outdir/7.dat"
 
-./ising -d 2 -L 20 -T 2.0 --nmeas 1 --nmcs 10000000  --ieq 1000 -s 107 > "$outdir/7.dat"
-
-#./ising -d 2 -L 20 -T 2.0 --nmeas 1 --nmcs 100000000  --ieq 1000 -s 107 > "$outdir/8.dat"
-#./ising -d 2 -L 20 -T 2.0 --nmeas 1 --nmcs 1000000000  --ieq 1000 -s 107 > "$outdir/9.dat"
+#$BINDIR/ising -d 2 -L 20 -T 2.0 --nmeas 1 --nmcs 100000000  --ieq 1000 -s 107 > "$outdir/8.dat"
+#$BINDIR/ising -d 2 -L 20 -T 2.0 --nmeas 1 --nmcs 1000000000  --ieq 1000 -s 107 > "$outdir/9.dat"
 N=400
 
-./mycut -f 1 < "$data" > "$fitxenergies"
+$BINDIR/mycut -f 1 < "$data" > "$fitxenergies"
 
 m=1
 for i in {1..12};do

@@ -52,7 +52,7 @@ glauber dynamic (a simple random spin flip).
 This command takes the first column of "simulation.txt" and saves it into
 `simulation_energies.txt`.
 
-     cat simulationenergies.txt jackknife > energyinfo.txt
+     cat simulationenergies.txt | jackknife > energyinfo.txt
 
 This command returns the jackknife estimations of the energies. Notice how
 the quantity `<E^2> - <E>^2` can be used to compute the heat capacity using

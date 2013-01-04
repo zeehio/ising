@@ -19,6 +19,17 @@ in a global directory you can use the `--prefix` option:
 
 ## Using the Ising model simulator:
 
+### Quick start:
+
+     ising -d 2 -L 20 -T 4.0 --nmeas 100 --nmcs 10000000 --ieq 5000 --dyn 0
+
+This command runs a 20x20 lattice, at a T=4 temperature, performing 10 
+millions of montecarlo sweeps of the lattice, printing the energy, the
+magnetization and a simple estimation of average cluster radius every 100
+sweeps. Before the 10 millions sweeps are performed, 5000 sweeps are done
+for thermalization. Each sweep is done using a random glauber dynamic (a
+simple random spin flip).
+
 ### Introduction
 
 To be written. If you are here you should know a bit about the Ising model

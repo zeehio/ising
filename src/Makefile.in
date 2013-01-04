@@ -34,7 +34,8 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = ising$(EXEEXT) binning$(EXEEXT) autocorr$(EXEEXT)
+bin_PROGRAMS = ising$(EXEEXT) binning$(EXEEXT) autocorr$(EXEEXT) \
+	jackknife$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -64,6 +65,10 @@ am_ising_OBJECTS = ising.$(OBJEXT)
 ising_OBJECTS = $(am_ising_OBJECTS)
 ising_LDADD = $(LDADD)
 ising_DEPENDENCIES = ../lib/libising.la
+am_jackknife_OBJECTS = jackknife.$(OBJEXT)
+jackknife_OBJECTS = $(am_jackknife_OBJECTS)
+jackknife_LDADD = $(LDADD)
+jackknife_DEPENDENCIES = ../lib/libising.la
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)/config
 depcomp = $(SHELL) $(top_srcdir)/config/depcomp
 am__depfiles_maybe = depfiles
@@ -77,8 +82,10 @@ CCLD = $(CC)
 LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
 	--mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
 	$(LDFLAGS) -o $@
-SOURCES = $(autocorr_SOURCES) $(binning_SOURCES) $(ising_SOURCES)
-DIST_SOURCES = $(autocorr_SOURCES) $(binning_SOURCES) $(ising_SOURCES)
+SOURCES = $(autocorr_SOURCES) $(binning_SOURCES) $(ising_SOURCES) \
+	$(jackknife_SOURCES)
+DIST_SOURCES = $(autocorr_SOURCES) $(binning_SOURCES) $(ising_SOURCES) \
+	$(jackknife_SOURCES)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -201,6 +208,7 @@ LDADD = ../lib/libising.la
 ising_SOURCES = ising.c 
 binning_SOURCES = binning.c
 autocorr_SOURCES = autocorr.c
+jackknife_SOURCES = jackknife.c
 all: all-am
 
 .SUFFIXES:
@@ -287,6 +295,9 @@ binning$(EXEEXT): $(binning_OBJECTS) $(binning_DEPENDENCIES) $(EXTRA_binning_DEP
 ising$(EXEEXT): $(ising_OBJECTS) $(ising_DEPENDENCIES) $(EXTRA_ising_DEPENDENCIES) 
 	@rm -f ising$(EXEEXT)
 	$(LINK) $(ising_OBJECTS) $(ising_LDADD) $(LIBS)
+jackknife$(EXEEXT): $(jackknife_OBJECTS) $(jackknife_DEPENDENCIES) $(EXTRA_jackknife_DEPENDENCIES) 
+	@rm -f jackknife$(EXEEXT)
+	$(LINK) $(jackknife_OBJECTS) $(jackknife_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -297,6 +308,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/autocorr.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/binning.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ising.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/jackknife.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

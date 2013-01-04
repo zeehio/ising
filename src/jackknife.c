@@ -1,7 +1,6 @@
 #include <math.h>
 #include <string.h>
 #include <stdio.h>
-#include <assert.h>
 #include <stdlib.h>
 #include <getopt.h>
 #include <ctype.h>
@@ -10,75 +9,8 @@
 // Utilities
 // ********************************************
 
-#ifdef USE_GSL
-// El Random number generator de la GSL.
-#include <gsl/gsl_rng.h>
-static gsl_rng *rng_struc=NULL;
-/** Initialises a Random number generator */
-static void InitRNG(unsigned long int seed) {
-    rng_struc =  gsl_rng_alloc (gsl_rng_mt19937);
-    gsl_rng_set(rng_struc,seed);
-    return;
-}
-/** Frees the Random number Generator: */
-static void FreeRNG() {
-	gsl_rng_free(rng_struc);
-	return;
-}
-/** Draws a double uniform random number between min and max: */
-static double drand(double min,double max)
-{
-    return min + gsl_rng_uniform (rng_struc)*(max-min);
-}
-/** Draws a random uniform integer in range [min,max) */
-static long int urand(long int min,long int max) {
-    return min+gsl_rng_uniform_int(rng_struc,max-min);
-}
-#else
-#include "r1279/r1279.c"
-/** Initialises a Random number generator */
-static void InitRNG(unsigned long int seed) {
-    setr1279(seed);
-    return;
-}
-/** Frees the Random number Generator: */
-static void FreeRNG() {
-	return;
-}
-/** Draws a double uniform random number between min and max: */
-static double drand(double min,double max)
-{
-    return min + r1279()*(max-min);
-}
-/** Draws a random uniform integer in range [min,max) */
-static long int urand(long int min,long int max) {
-    return ir1279range(min,max-1);
-}
-#endif
-
-/** Allocates memory */
-void* xmalloc(size_t midaenbytes)
-{
-    void* ptr=malloc(midaenbytes);
-    assert(ptr!=NULL);
-    return ptr;
-}
-
-/** Reallocates memory */
-void* xrealloc(void* vector, size_t midaenbytes)
-{
-	void *tmpvec=NULL;
-	tmpvec=realloc(vector,midaenbytes);
-	if (tmpvec==NULL)
-	{
-		free(vector);
-		fflush(stdout);
-		fprintf(stderr,"Error reallocating %d bytes\n",midaenbytes);
-		fflush(stderr);
-		abort();
-	}
-	return tmpvec;
-}
+#include "random_num.h"
+#include "memory.h"
 
 // Reads all the data from stdin and stores it at x, which is expected uninitialized
 int llegeixx(double **x)

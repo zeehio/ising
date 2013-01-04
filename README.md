@@ -21,14 +21,26 @@ in a global directory you can use the `--prefix` option:
 
 ### Quick start:
 
-     ising -d 2 -L 20 -T 4.0 --nmeas 100 --nmcs 10000000 --ieq 5000 --dyn 0
+     ising -d 2 -L 20 -T 4.0 --nmeas 500 --nmcs 10000000 --ieq 5000 --dyn 0 > simulation.txt
 
 This command runs a 20x20 lattice, at a T=4 temperature, performing 10 
 millions of montecarlo sweeps of the lattice, printing the energy, the
-magnetization and a simple estimation of average cluster radius every 100
-sweeps. Before the 10 millions sweeps are performed, 5000 sweeps are done
-for thermalization. Each sweep is done using a random glauber dynamic (a
-simple random spin flip).
+magnetization and a simple estimation of average cluster radius every 500
+sweeps to the `simulation.txt`. Before the 10 millions sweeps are performed,
+5000 sweeps are done for thermalization. Each sweep is done using a random 
+glauber dynamic (a simple random spin flip).
+
+     mycut -f 1  < simulation.txt > simulationenergies.txt
+
+This command takes the first column of "simulation.txt" and saves it into
+`simulation_energies.txt`.
+
+     cat simulationenergies.txt jackknife > energyinfo.txt
+
+This command returns the jackknife estimations of the energies. Notice how
+the quantity `<E^2> - <E>^2` can be used to compute the heat capacity using
+the fluctuation-dissipation theorem.
+
 
 ### Introduction
 

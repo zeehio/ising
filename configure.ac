@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(ising, 3.0,sergioller@gmail.com)
+AC_INIT(ising, 4.0,sergioller@gmail.com)
 AC_CONFIG_AUX_DIR(config)
 AC_CONFIG_SRCDIR(src/ising.c)
 AC_CONFIG_MACRO_DIR([config/m4])

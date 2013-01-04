@@ -21,6 +21,23 @@ in a global directory you can use the `--prefix` option:
 
 ### Quick start:
 
+First, obtain the latest version of the source code:
+
+     git clone https://github.com/zeehio/ising.git
+
+
+Then we build the sources:
+
+     ./configure
+     make
+     make install
+
+Finally we move to the default install directory:
+
+     cd install/bin
+
+Now we will perform a simulation and extract some measurements:
+
      ising -d 2 -L 20 -T 4.0 --nmeas 500 --nmcs 10000000 --ieq 5000 --dyn 0 > simulation.txt
 
 This command runs a 20x20 lattice, at a T=4 temperature, performing 10 

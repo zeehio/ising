@@ -685,6 +685,9 @@ int StandardMetropolis(IntVector spins, ListIntVector veins, IntVector sequentia
                     i+=SpinToFlipKawasakiNeighbours(spins,veins,&flip,&flip2,-1);
 //                    i+=SpinToFlipKawasakiNeighbours(spins,veins,&flip,&flip2,itmaxpermcs-i);
                     break;
+                default:
+                    fprintf(stderr,"Unknown dynamic in StandardMetropolis\n");
+                    exit(-1);
             }
             if (i>=itmaxpermcs)
             {

@@ -58,11 +58,10 @@ void help()
 // Parse the command line arguments using getopt.
 int parseinput(int argc, char **argv,int *m)
 {
-    int c,itmp=-2;
+    int c,itmp;
     opterr=0;
     while ((c = getopt (argc, argv, "m:h")) != -1)
     {
-		itmp=-2;
 		switch (c)
 		{
 		case 'h':

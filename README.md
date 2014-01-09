@@ -4,6 +4,7 @@ ISING - An Ising model simulator
 ## Building the source code
 Simply run:
 
+     ./autogen.sh
      ./configure
      make
      make install
@@ -12,6 +13,7 @@ After `make install`, the **ising** program will be found in
 the `install/bin` directory. If you want to install the ising model simulator
 in a global directory you can use the `--prefix` option:
 
+     ./autogen.sh
      ./configure --prefix=/usr/local
      make
      sudo make install
@@ -26,15 +28,17 @@ First, obtain the latest version of the source code:
      git clone https://github.com/zeehio/ising.git
 
 
-Then we build the sources:
+Then we build the sources. You will need autotools (`autoconf`, `automake`
+and `libtool`).
 
+     ./autogen.sh
      ./configure
      make
      make install
 
 Finally we move to the default install directory:
 
-     cd install/bin
+     cd "install/bin"
 
 Now we will perform a simulation and extract some measurements:
 

@@ -5,5 +5,5 @@ EXTRA_DIST = dibuix_rmig.gnu  PartA5plot1.gnu  PartA7plot2.gnu  PartB2.sh \
 	PartA3plot.gnu   PartA6.sh        PartB2plot2.gnu  PartB4.sh \
 	PartA3.sh        PartA7plot1.gnu  PartB2plot3.gnu  PlotState.gnu
 
-bin_SCRIPTS = mycut
+dist_bin_SCRIPTS = mycut
 

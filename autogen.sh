@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mkdir "config/m4"
+mkdir -p "config/m4"
 if [ -z "$AUTOMAKE" ]; then
     AUTOMAKE="automake";
 fi;
